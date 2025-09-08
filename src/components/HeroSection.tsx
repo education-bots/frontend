@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { Sparkles } from "lucide-react";
 const images = [
   "/images/f3.jpg",
   "/images/slide5.jpg",
-  "/images/slide3.jpg",
+  "/images/f7.webp",
   "/images/f2.jpg",
   "/images/f1.jpg",
   "/images/f6.jpg",
@@ -27,8 +27,7 @@ export default function HeroSection() {
 
   return (
     <section
-  className="w-full min-h-[calc(100vh-80px)] relative flex flex-col md:flex-row px-4 sm:px-6 py-[80px] mt-[80px] 
-  bg-[url('/images/home3.jpg')] bg-cover bg-center bg-no-repeat"
+  className="w-full min-h-[calc(100vh-80px)] bg-gradient-to-r from-yellow-200 via-pink-200 to-blue-200  relative flex flex-col md:flex-row px-4 sm:px-6 py-[80px] mt-[80px]"
 >
       {/* Left Card with Slide-in Animation */}
       <motion.div
@@ -37,35 +36,22 @@ export default function HeroSection() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        {/* 🎀 Light Pink Ball (top-left area) */}
-        <motion.div
-          className="hidden lg:block absolute left-8 top-10 w-14 h-14 bg-pink-300 rounded-full shadow-lg z-10"
-          animate={{ y: [0, -25, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hidden lg:block absolute left-8 top-50 w-14 h-14 bg-purple-600 rounded-full shadow-lg z-10"
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
+        
 
-        {/* 🌐 Sky Blue Ball (bottom-left area) */}
-        <motion.div
-          className="hidden lg:block absolute left-8 bottom-12 w-14 h-14 bg-sky-300 rounded-full shadow-lg z-10"
-          animate={{ y: [0, -25, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
+       <div className="bg-white/90 p-6 md:p-8 rounded-2xl shadow-2xl max-w-md text-center transform hover:rotate-x-3 hover:rotate-y-3 hover:scale-105 transition duration-500">
+  <h1 className="text-2xl md:text-4xl font-extrabold text-purple-700 mb-4 flex flex-col items-center gap-3">
+    {/* Sparkles Row */}
+    <div className="flex justify-center gap-2">
+      <Sparkles className="text-yellow-400 w-8 h-8 animate-bounce" />
+      <Sparkles className="text-pink-400 w-8 h-8 animate-bounce" />
+      <Sparkles className="text-yellow-400 w-8 h-8 animate-bounce" />
+      <Sparkles className="text-pink-400 w-8 h-8 animate-bounce" />
+      <Sparkles className="text-yellow-400 w-8 h-8 animate-bounce" />
+    </div>
 
-        {/* White Card */}
-        <div className="bg-white/90 p-6 md:p-8 rounded-2xl shadow-2xl max-w-md text-center transform hover:rotate-x-3 hover:rotate-y-3 hover:scale-105 transition duration-500">
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
-            Welcome to our AI School
-          </h1>
+    {/* Heading */}
+    Welcome to our AI School
+  </h1>
           <p className="text-base md:text-lg text-gray-700 mb-6">
             Learn from our AI teachers and explore the future of education.
           </p>
@@ -85,27 +71,7 @@ export default function HeroSection() {
           </Link>
         </div>
 
-        {/* 🎀 Right Side Balls */}
-        <motion.div
-          className=" hidden lg:block absolute right-8 top-10 w-14 h-14 bg-pink-300 rounded-full shadow-lg z-10"
-          animate={{ y: [0, -25, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hidden lg:block absolute right-8 top-50 w-14 h-14 bg-purple-600 rounded-full shadow-lg z-10"
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="hidden lg:block absolute right-8 bottom-12 w-14 h-14 bg-sky-300 rounded-full shadow-lg z-10"
-          animate={{ y: [0, -25, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
+        
       </motion.div>
 
       {/* Right Rotating Images */}

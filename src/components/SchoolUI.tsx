@@ -59,21 +59,25 @@ export default function SchoolUI() {
   };
 
   // English classes
-  const englishClasses = [
-    { name: "KG", color: "bg-pink-500", hoverColor: "hover:bg-pink-600" },
-    { name: "Class 1", color: "bg-yellow-500", hoverColor: "hover:bg-yellow-600" },
-    { name: "Class 2", color: "bg-green-500", hoverColor: "hover:bg-green-600" },
-    { name: "Class 3", color: "bg-blue-500", hoverColor: "hover:bg-blue-600" },
-    { name: "Class 4", color: "bg-purple-500", hoverColor: "hover:bg-purple-600" },
-  ];
+// English classes with gradient + hover gradient
+const englishClasses = [
+  { name: "KG", color: "bg-gradient-to-r from-pink-400 to-pink-600", hoverColor: "hover:from-pink-500 hover:to-pink-700" },
+  { name: "Class 1", color: "bg-gradient-to-r from-yellow-300 to-yellow-500", hoverColor: "hover:from-yellow-400 hover:to-yellow-600" },
+  { name: "Class 2", color: "bg-gradient-to-r from-green-300 to-green-500", hoverColor: "hover:from-green-400 hover:to-green-600" },
+  { name: "Class 3", color: "bg-gradient-to-r from-blue-300 to-blue-500", hoverColor: "hover:from-blue-400 hover:to-blue-600" },
+  { name: "Class 4", color: "bg-gradient-to-r from-purple-300 to-purple-500", hoverColor: "hover:from-purple-400 hover:to-purple-600" },
+];
 
-  const urduClasses = [
-    { name: "کےجی", color: "bg-pink-500", hoverColor: "hover:bg-pink-600" },
-    { name: "کلاس ۱", color: "bg-purple-500", hoverColor: "hover:bg-purple-600" },
-    { name: "کلاس ۲", color: "bg-teal-500", hoverColor: "hover:bg-teal-600" },
-    { name: "کلاس ۳", color: "bg-red-500", hoverColor: "hover:bg-red-600" },
-    { name: "کلاس ۴", color: "bg-indigo-500", hoverColor: "hover:bg-indigo-600" },
-  ];
+// Urdu classes with gradient + hover gradient
+const urduClasses = [
+  { name: "کےجی", color: "bg-gradient-to-r from-pink-400 to-pink-600", hoverColor: "hover:from-pink-500 hover:to-pink-700" },
+  { name: "کلاس ۱", color: "bg-gradient-to-r from-purple-300 to-purple-500", hoverColor: "hover:from-purple-400 hover:to-purple-600" },
+  { name: "کلاس ۲", color: "bg-gradient-to-r from-cyan-300 to-cyan-500", hoverColor: "hover:from-cyan-400 hover:to-cyan-600" },
+  { name: "کلاس ۳", color: "bg-gradient-to-r from-rose-300 to-rose-500", hoverColor: "hover:from-rose-400 hover:to-rose-600" },
+  { name: "کلاس ۴", color: "bg-gradient-to-r from-lime-300 to-lime-500", hoverColor: "hover:from-lime-400 hover:to-lime-600" },
+];
+
+  
 
   const slides = [
     { src: "/images/my2.jpg", alt: "Shapes" },
@@ -83,19 +87,13 @@ export default function SchoolUI() {
   ];
 
   return (
-  <div className="relative min-h-screen flex flex-col items-center px-4 sm:px-6 py-[80px]">
-
-      {/* Background */}
-      <Image
-        src="/images/home3.jpg"
-        alt="School Background"
-        fill
-        className="object-cover -z-10"
-      />
-
-      {/* 🚫 Removed Title Card block here */}
-
-      {/* English - Slider - Urdu */}
+  <div className="relative min-h-screen flex flex-col items-center bg-gradient-to-r from-blue-100 via-pink-100 to-yellow-100  px-4 sm:px-6 py-[80px]">
+  <p className="text-3xl sm:text-2xl md:text-5xl lg:text-4xl font-extrabold 
+  bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 
+  bg-clip-text text-transparent drop-shadow-lg text-center mb-16">
+   <span className="text-black">🌈</span> Learn Smart — Choose Your Class Today! ✨
+  </p>
+   {/* English - Slider - Urdu */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl mb-10 items-start">
         {/* English */}
         <div className="flex flex-col gap-3">

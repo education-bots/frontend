@@ -5,7 +5,7 @@ import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 function Footer() {
   return (
-    <footer className="relative bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 text-gray-800 rounded-t-[2.5rem] shadow-xl mt-16 overflow-hidden">
+    <footer className="relative bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 text-gray-800 rounded-t-[2.5rem] shadow-xl overflow-hidden">
       {/* Decorative bubbles for playful effect */}
       <div className="absolute -top-8 -left-8 w-24 h-24 bg-pink-400 opacity-40 rounded-full blur-2xl"></div>
       <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-blue-400 opacity-40 rounded-full blur-2xl"></div>
@@ -91,12 +91,11 @@ function Footer() {
       {/* Copyright */}
       <div className="relative bg-white/80 text-center py-4 text-sm text-gray-700 rounded-b-[2.5rem]">
         © {new Date().getFullYear()}{" "}
-        <span className="font-bold text-pink-700">KiddoLearn</span><span className="font-bold text-emerald-700"> Asia Parveen</span>. All Rights
-        Reserved.
+        <span className="font-bold text-pink-700">KiddoLearn</span>
+        <span className="font-bold text-emerald-700"> Asia Parveen</span>. All Rights Reserved.
       </div>
     </footer>
   );
 }
 
 export default Footer;
-

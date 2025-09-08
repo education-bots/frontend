@@ -18,10 +18,10 @@ export default function Navbar() {
               className="rounded-md"
             />
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
-                AI Learning School
-              </h1>
-              <p className="text-gray-600 text-xs sm:text-sm">
+              <h1 className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 bg-clip-text text-transparent drop-shadow-lg flex items-center">
+               AI Learning School
+                   </h1>
+            <p className="text-gray-600 text-xs sm:text-sm">
                 Choose your class and start your learning adventure!
               </p>
             </div>
@@ -31,19 +31,19 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <Link
               href="/"
-              className="text-gray-700 hover:text-pink-500 font-medium"
+              className="font-bold text-purple-700 hover:text-pink-500"
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="text-gray-700 hover:text-pink-500 font-medium"
+              className="font-bold text-purple-700 hover:text-pink-500"
             >
               About
             </Link>
             <Link
               href="/contact"
-              className="text-gray-700 hover:text-pink-500 font-medium"
+              className="font-bold text-purple-700 hover:text-pink-500"
             >
               Attendance
             </Link>
