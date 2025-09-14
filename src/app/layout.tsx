@@ -2,14 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-<<<<<<< HEAD
 import { ToasterWrapper } from "@/components/toaster-wrapper";
  
  
-=======
 import Footer from "@/components/Footer";
 
->>>>>>> 6b9677d358f924e20faa2e8d3cd14743e04ffdab
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,11 +34,9 @@ export default function RootLayout({
       >
         <Navbar/>
         {children}
-<<<<<<< HEAD
-        <ToasterWrapper />
-=======
+        
         <Footer/>
->>>>>>> 6b9677d358f924e20faa2e8d3cd14743e04ffdab
+         <ToasterWrapper />
       </body>
     </html>
   );
