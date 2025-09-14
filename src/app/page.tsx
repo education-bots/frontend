@@ -5,8 +5,7 @@ import MainPage from '@/components/MainPage'
 import LearningCards from '@/components/LearningCards'
 import ComingSoonBanner from '@/components/CommingSoonBanner'
 import FAQSection from '@/components/FAQSection'
-import Footer from '@/components/Footer'
-
+ 
 const Home = () => {
   return (
     <div>
@@ -17,8 +16,7 @@ const Home = () => {
       <LearningCards/>
       <ComingSoonBanner/>
       <FAQSection/>
-      <Footer/>
-    </div>
+  </div>
   )
 }
 
