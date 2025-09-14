@@ -1,23 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import Spline from "@splinetool/react-spline";
+import Robot from "@/components/Robot";
+
 const images = [
-  "/images/f3.jpg",
-  "/images/slide5.jpg",
-  "/images/f7.webp",
-  "/images/f2.jpg",
-  "/images/f1.jpg",
-  "/images/f6.jpg",
+  "/images/myone.jpg",
+  "/images/my6.jpg",
+  "/images/my5.jpg",
+  "/images/my2.jpg",
+  "/images/my3.jpg",
+  "/images/my4.jpg",
 ];
 
 export default function HeroSection() {
   const [index, setIndex] = useState(0);
+  const splineRef = useRef<any>(null);
 
-  // Auto change image every 3s
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
@@ -26,73 +27,59 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section
-  className="w-full min-h-[calc(100vh-80px)] bg-gradient-to-r from-yellow-200 via-pink-200 to-blue-200  relative flex flex-col md:flex-row px-4 sm:px-6 py-[80px] mt-[80px]"
->
-      {/* Left Card with Slide-in Animation */}
-      <motion.div
-        className="w-full md:w-3/5 flex items-center justify-center p-6 md:p-12 relative"
-        initial={{ opacity: 0, x: -150 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Fullscreen Spline Background moved down */}
+      <div
+        className="absolute top-20 left-0 w-full h-screen z-0"
+        style={{ pointerEvents: "none" }} // optional: so Spline doesn't block clicks
       >
-        
+        <Spline
+          scene="https://prod.spline.design/4vdFX7zRpoEjgwDr/scene.splinecode"
+          className="w-full h-full"
+          onLoad={(app) => {
+            splineRef.current = app;
+            if (typeof app.play === "function") {
+              try {
+                app.play();
+              } catch (e) {}
+            }
+          }}
+        />
+      </div>
 
-       <div className="bg-white/90 p-6 md:p-8 rounded-2xl shadow-2xl max-w-md text-center transform hover:rotate-x-3 hover:rotate-y-3 hover:scale-105 transition duration-500">
-  <h1 className="text-2xl md:text-4xl font-extrabold text-purple-700 mb-4 flex flex-col items-center gap-3">
-    {/* Sparkles Row */}
-    <div className="flex justify-center gap-2">
-      <Sparkles className="text-yellow-400 w-8 h-8 animate-bounce" />
-      <Sparkles className="text-pink-400 w-8 h-8 animate-bounce" />
-      <Sparkles className="text-yellow-400 w-8 h-8 animate-bounce" />
-      <Sparkles className="text-pink-400 w-8 h-8 animate-bounce" />
-      <Sparkles className="text-yellow-400 w-8 h-8 animate-bounce" />
-    </div>
+      {/* Content Over Spline stays in the same place */}
+      <div className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-12">
+        <motion.div
+          className="w-full lg:w-1/3 flex items-center justify-center p-6 lg:p-12 translate-x-[-40px] translate-y-[30px]"
+          initial={{ opacity: 0, x: -150, y: 50 }}
+          animate={{ opacity: 1, x: 0, y: 40 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          <Robot />
+        </motion.div>
 
-    {/* Heading */}
-    Welcome to our AI School
-  </h1>
-          <p className="text-base md:text-lg text-gray-700 mb-6">
-            Learn from our AI teachers and explore the future of education.
-          </p>
-
-          {/* English Admission Button */}
-          <Link href="/admission">
-            <button className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:scale-105 transition mb-4">
-              🎓 Apply for Admission
-            </button>
-          </Link>
-
-          {/* Urdu Admission Button */}
-          <Link href="/admission">
-            <button className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:scale-105 transition">
-              داخلے جاری 🎓
-            </button>
-          </Link>
+        {/* Right Rotating Images */}
+        <div className="hidden md:block lg:w-1/3 relative items-center justify-center overflow-visible h-56 lg:h-[400px] pt-2 lg:pt-15">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, rotateY: 90 }}
+              animate={{ opacity: 1, rotateY: 0 }}
+              exit={{ opacity: 0, rotateY: -90 }}
+              transition={{ duration: 0.8 }}
+              className="absolute w-[70%] h-[90%] right-0"
+              style={{ transform: "translateX(35%)" }}
+            >
+              <Image
+                src={images[index]}
+                alt={`Slide ${index}`}
+                fill
+                priority
+                className="object-cover rounded-xl shadow-xl"
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
-
-        
-      </motion.div>
-
-      {/* Right Rotating Images */}
-      <div className="w-full md:w-2/5 relative flex items-center justify-center overflow-hidden h-64 md:h-auto">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, rotateY: 90 }}
-            animate={{ opacity: 1, rotateY: 0 }}
-            exit={{ opacity: 0, rotateY: -90 }}
-            transition={{ duration: 0.8 }}
-            className="absolute w-full h-full"
-          >
-            <Image
-              src={images[index]}
-              alt={`Slide ${index}`}
-              fill
-              className="object-cover rounded-xl shadow-xl"
-            />
-          </motion.div>
-        </AnimatePresence>
       </div>
     </section>
   );
