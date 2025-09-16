@@ -47,39 +47,33 @@ export default function Navbar() {
           </div>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="font-semibold text-gray-700 hover:text-purple-600">
+          <div className="hidden md:flex items-center gap-6">
+            <Link href="/" className="font-semibold text-purple-800 hover:text-pink-600">
               Home
             </Link>
-            <Link href="/about" className="font-semibold text-gray-700 hover:text-purple-600">
-              About
-            </Link>
-            <Link href="/attendance" className="font-semibold text-gray-700 hover:text-purple-600">
-              Attendance
-            </Link>
-            <Link href="/admission" className="font-semibold text-gray-700 hover:text-purple-600">
+            <Link href="/admission" className="font-semibold text-purple-800 hover:text-pink-600">
               Admission
             </Link>
             {user ? (
               <>
-                <Link href="/dashboard" className="font-semibold text-gray-700 hover:text-purple-600">
+                <Link href="/dashboard" className="font-semibold text-purple-800 hover:text-pink-600">
                   Dashboard
                 </Link>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={logout}
-                  className="text-red-600 hover:bg-red-50"
+                  className="text-purple-800 hover:text-pink-600"
                 >
                   Logout
                 </Button>
               </>
             ) : (
               <>
-                <Link href="/auth/login" className="font-semibold text-gray-700 hover:text-purple-600">
+                <Link href="/auth/login" className="font-semibold text-purple-800 hover:text-pink-600">
                   Login
                 </Link>
-                <Link href="/auth/register" className="font-semibold text-gray-700 hover:text-purple-600">
+                <Link href="/auth/register" className="font-semibold text-purple-800 hover:text-pink-600">
                   Register
                 </Link>
               </>
@@ -88,7 +82,7 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 text-gray-700 hover:text-purple-600"
+            className="lg:hidden p-2 text-purple-800 hover:text-pink-600"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <Menu size={24} />
@@ -98,45 +92,84 @@ export default function Navbar() {
 
       {/* Mobile dropdown */}
       {mobileOpen && (
-        <div className="md:hidden bg-white/95 shadow-md px-6 py-4 space-y-4">
-          <Link href="/" className="block font-semibold text-gray-700 hover:text-purple-600">
-            Home
-          </Link>
-          <Link href="/about" className="block font-semibold text-gray-700 hover:text-purple-600">
-            About
-          </Link>
-          <Link href="/attendance" className="block font-semibold text-gray-700 hover:text-purple-600">
-            Attendance
-          </Link>
-          <Link href="/admission" className="block font-semibold text-gray-700 hover:text-purple-600">
-            Admission
-          </Link>
-          {user ? (
-            <>
-              <Link href="/dashboard" className="block font-semibold text-gray-700 hover:text-purple-600">
-                Dashboard
-              </Link>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={logout}
-                className="w-full text-red-600 hover:bg-red-50"
-              >
-                Logout
-              </Button>
-            </>
-          ) : (
-            <>
-              <Link href="/auth/login" className="block font-semibold text-gray-700 hover:text-purple-600">
-                Login
-              </Link>
-              <Link href="/auth/register" className="block font-semibold text-gray-700 hover:text-purple-600">
-                Register
-              </Link>
-            </>
-          )}
-        </div>
-      )}
+  <div className="lg:hidden bg-gradient-to-r from-yellow-200 via-pink-200 to-blue-200 shadow-md px-6 py-4 space-y-4">
+     {/* ✅ Added p tag under headings */}
+    <p className="mt-2 text-sm sm:text-base text-gray-700">
+      Click{" "}
+      <Link
+        href="/auth/register"
+        className="underline font-semibold text-blue-800 hover:text-pink-700"
+      >
+        Register
+      </Link>{" "}
+      to fill your admission form
+    </p>
+
+    <Link
+      href="/"
+      className="block font-semibold text-purple-800 hover:text-pink-600"
+    >
+      Home
+    </Link>
+    <Link
+      href="/admission"
+      className="block font-semibold text-purple-800 hover:text-pink-600"
+    >
+      Admission
+    </Link>
+    {user ? (
+      <>
+        <Link
+          href="/dashboard"
+          className="block font-semibold text-purple-800 hover:text-pink-600"
+        >
+          Dashboard
+        </Link>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={logout}
+          className="w-full text-purple-800 hover:text-pink-600"
+        >
+          Logout
+        </Button>
+      </>
+    ) : (
+      <>
+        <Link
+          href="/auth/login"
+          className="block font-semibold text-purple-800 hover:text-pink-600"
+        >
+          Login
+        </Link>
+        <Link
+          href="/auth/register"
+          className="block font-semibold text-purple-800 hover:text-pink-600"
+        >
+          Register
+        </Link>
+      </>
+    )}
+  </div>
+)}
+
+
+      {/* 🎯 Centered Heading over Hero */}
+      <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-50 px-4">
+        <h1 className="text-xl sm:text-2xl md:text-2xl font-extrabold bg-gradient-to-r from-pink-700 via-purple-700 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
+          Welcome to AI School
+        </h1>
+        <p className="mt-2 text-sm sm:text-base text-gray-700">
+          Click{" "}
+          <Link
+            href="/auth/register"
+            className="underline font-semibold text-blue-800 hover:text-pink-700"
+          >
+           Register
+          </Link>{" "}
+          to fill your admission form
+        </p>
+      </div>
     </nav>
   );
 }

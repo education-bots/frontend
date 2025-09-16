@@ -8,66 +8,52 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
-import { useToast } from "@/components/ui/use-toast";
+import toast from "react-hot-toast";   // ✅ new import
 
 export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setLoading(true);
+    e.preventDefault();
+    setLoading(true);
 
-  const form = e.currentTarget; // store reference
+    const form = e.currentTarget; 
+    const formData = new FormData(form);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
-  const formData = new FormData(form);
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
 
-  try {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      // no emailRedirectTo here
-    });
+      console.log(data, error);
+      if (error) throw error;
 
-    console.log(data, error);
-    if (error) throw error;
+      // ✅ Success toast
+      toast.success(`Check your inbox ✉️ - a confirmation email was sent to ${email}.`);
 
-    toast({
-      title: "Check your inbox ✉️",
-      description: `A confirmation email was sent to ${email}. Please verify your account.`,
-    });
+      form.reset();
+    } catch (err: any) {
+      // ❌ Error toast
+      toast.error(`Registration failed: ${err.message}`);
+    }
 
-    form.reset();
-  } catch (err: any) {
-    toast({
-      variant: "destructive",
-      title: "Registration failed",
-      description: err.message,
-    });
-  }
-
-  setLoading(false);
-};
-
-
+    setLoading(false);
+  };
 
   const signUpWithGoogle = async () => {
     try {
       const { error } = await supabase.auth.signInWithOAuth({ provider: "google" });
       if (error) throw error;
     } catch (err: any) {
-      toast({
-        variant: "destructive",
-        title: "Google login failed",
-        description: err.message,
-      });
+      toast.error(`Google login failed: ${err.message}`);
     }
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 px-4">
       <Card className="w-full max-w-md shadow-lg border border-gray-200">
         <CardHeader className="text-center space-y-2">
           <CardTitle className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-pink-600 bg-clip-text text-transparent">

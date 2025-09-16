@@ -35,17 +35,25 @@ function RobotModel() {
         }
 
         mesh.material = new THREE.MeshStandardMaterial({
-         color: new THREE.Color("#6d28d9"),
+  color: new THREE.Color("#6d28d9"), // base purple
   map: albedoMapBot,
+
   emissiveMap: emissiveMapBot,
-  emissive: new THREE.Color("#00ffff"),
-  emissiveIntensity: 2,
+  // blend cyan (#00ffff) with pink (#ff007f)
+  emissive: new THREE.Color("#40e0d0").lerp(new THREE.Color("#ff007f"), 0.3),
+  emissiveIntensity: 1.5,
+
   metalnessMap: metallicMapBot,
+  metalness: 0.8,
+
   roughnessMap: roughnessMapBot,
+  roughness: 0.4,
+
   alphaMap: opacityMapHolo,
   transparent: true,
+
   aoMap: emissiveMapHolo,
-        });
+});
       }
     });
 
@@ -68,18 +76,22 @@ function RobotModel() {
 
 export default function Robot() {
   return (
-    <div className="w-full h-[500px] lg:h-[500px]">
-      <Canvas camera={{ position: [0, 3, 8], fov: 50 }} shadows>
-        {/* Lights */}
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[5, 10, 5]} intensity={1.2} castShadow />
+    <div className="w-full flex justify-center">
+      <div className="w-full max-w-[400px] h-[300px] lg:max-w-[600px] lg:h-[500px]">
+        <Canvas camera={{ position: [0, 3, 8], fov: 50 }} shadows>
+          {/* Lights */}
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[5, 10, 5]} intensity={1.2} castShadow />
 
-        {/* Robot */}
-        <RobotModel />
+          {/* Robot */}
+          <RobotModel />
 
-        {/* Controls */}
-        <OrbitControls enableDamping />
-      </Canvas>
+          {/* Controls */}
+          <OrbitControls enableDamping />
+        </Canvas>
+      </div>
     </div>
   );
 }
+
+

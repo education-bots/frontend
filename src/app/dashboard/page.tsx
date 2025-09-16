@@ -97,7 +97,7 @@ export default function DashboardPage() {
   if (loading) return <p className="text-center mt-20">Loading...</p>;
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-50 p-6">
+    <div className="flex h-screen items-center justify-center bg-gradient-to-br from-pink-200 via-yellow-100 to-blue-200  p-6  mt-20">
       <div className="w-full max-w-2xl space-y-6">
         {/* Profile Info */}
         <Card>
