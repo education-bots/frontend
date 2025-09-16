@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState,use } from "react";
 import { motion } from "framer-motion";
 import { Bot, Send } from "lucide-react";
 
@@ -49,13 +49,12 @@ Twinkle Twinkle Little Star ✨
 Try counting blocks, matching colors, or tracing letters!
 🏆 Fun and learning combined!`,
 };
-
 interface AgentPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 function AgentPage({ params }: AgentPageProps) {
-  const { slug } = params;
+  const { slug } = use(params);
   const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
@@ -99,7 +98,7 @@ setTimeout(() => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-200 via-yellow-100 to-blue-200 p-6">
-      <div className="w-full max-w-2xl bg-yellow-50 border-4 border-brown-600 rounded-2xl shadow-xl relative">
+      <div className="w-full max-w-2xl bg-yellow-50 border-4 border-gray-300 rounded-2xl shadow-xl relative mt-20 ">
         {/* Left Dots */}
         <div className="absolute -left-4 top-0 h-full flex flex-col justify-around">
           {Array.from({ length: 12 }).map((_, i) => (
@@ -108,7 +107,7 @@ setTimeout(() => {
         </div>
 
         {/* Header */}
-        <h1 className="text-3xl font-bold text-center text-purple-700 py-4 border-b-2 border-dashed border-gray-400">
+        <h1 className="text-3xl font-bold text-center text-purple-700 py-8 border-b-2  border-dashed border-gray-400">
           📓 {slug.charAt(0).toUpperCase() + slug.slice(1)} Agent
         </h1>
 

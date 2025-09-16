@@ -48,15 +48,17 @@ export default function HeroSection() {
       </div>
 
       {/* Content Over Spline stays in the same place */}
-      <div className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-12">
-        <motion.div
-          className="w-full lg:w-1/3 flex items-center justify-center p-6 lg:p-12 translate-x-[-40px] translate-y-[30px]"
-          initial={{ opacity: 0, x: -150, y: 50 }}
-          animate={{ opacity: 1, x: 0, y: 40 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          <Robot />
-        </motion.div>
+<div className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-12">
+  <motion.div
+    className="hidden lg:block  w-full lg:w-1/3 items-center justify-center p-6 lg:p-12 translate-x-[-40px] translate-y-[30px]"
+    initial={{ opacity: 0, x: -150, y: 50 }}
+    animate={{ opacity: 1, x: 0, y: 40 }}
+    transition={{ duration: 1, ease: "easeOut" }}
+  >
+    <Robot />
+  </motion.div>
+ 
+
 
         {/* Right Rotating Images */}
         <div className="hidden md:block lg:w-1/3 relative items-center justify-center overflow-visible h-56 lg:h-[400px] pt-2 lg:pt-15">
