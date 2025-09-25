@@ -69,7 +69,8 @@ function FAQSection() {
     </p>
   </div>
 
-      {/* Add Question */}
+      <div className="max-w-3xl mx-auto">
+        {/* Add Question */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -133,6 +134,7 @@ function FAQSection() {
             </AnimatePresence>
           </motion.div>
         ))}
+      </div>
       </div>
     </section>
   );
