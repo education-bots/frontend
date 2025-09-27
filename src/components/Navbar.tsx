@@ -29,7 +29,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300 shadow-md fixed top-0 left-0 z-50">
+    <nav className="w-full bg-gradient-to-r from-yellow-200 via-pink-200 to-blue-200 shadow-md fixed top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo + Title */}
@@ -42,7 +42,7 @@ export default function Navbar() {
               className="rounded-md"
             />
             <h1 className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-pink-700 via-purple-700 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
-              AI Learning School
+              AiCompanion
             </h1>
           </div>
 
@@ -51,9 +51,7 @@ export default function Navbar() {
             <Link href="/" className="font-semibold text-purple-800 hover:text-pink-600">
               Home
             </Link>
-            <Link href="/admission" className="font-semibold text-purple-800 hover:text-pink-600">
-              Admission
-            </Link>
+            
             {user ? (
               <>
                 <Link href="/dashboard" className="font-semibold text-purple-800 hover:text-pink-600">
@@ -111,12 +109,7 @@ export default function Navbar() {
     >
       Home
     </Link>
-    <Link
-      href="/admission"
-      className="block font-semibold text-purple-800 hover:text-pink-600"
-    >
-      Admission
-    </Link>
+    
     {user ? (
       <>
         <Link
@@ -157,7 +150,7 @@ export default function Navbar() {
       {/* 🎯 Centered Heading over Hero */}
       <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-50 px-4">
         <h1 className="text-xl sm:text-2xl md:text-2xl font-extrabold bg-gradient-to-r from-pink-700 via-purple-700 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
-          Welcome to AI School
+          Welcome to AiCompanion
         </h1>
         <p className="mt-2 text-sm sm:text-base text-gray-700">
           Click{" "}
