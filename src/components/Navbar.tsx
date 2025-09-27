@@ -47,6 +47,12 @@ export default function Navbar() {
             >
               Attendance
             </Link>
+              <Link
+              href="/quiz"
+              className="text-gray-700 hover:text-pink-500 font-medium"
+            >
+              Quiz
+            </Link>
           </div>
         </div>
       </div>
