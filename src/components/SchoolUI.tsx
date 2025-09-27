@@ -54,17 +54,37 @@ export default function Class5AI() {
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-6">
-        <Link href="/chat">
-          <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition">
-            Start Chat 💬
-          </button>
-        </Link>
+      <div className="flex flex-wrap gap-6 justify-center">
         <Link href="/books">
           <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition">
             View Books 📖
           </button>
         </Link>
+        <Link href="/chat">
+          <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition">
+            Start Chat 💬
+          </button>
+        </Link>
+        <Link href="/quiz">
+          <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition">
+            Take Quiz 🎯
+          </button>
+        </Link>
+      </div>
+
+      {/* Timeline */}
+      <div className="mt-10 flex items-center justify-center gap-6 text-gray-700 font-semibold">
+        <span className="flex items-center gap-2">
+          📖 Books
+        </span>
+        <span className="text-purple-500">➝</span>
+        <span className="flex items-center gap-2">
+          💬 Chat
+        </span>
+        <span className="text-purple-500">➝</span>
+        <span className="flex items-center gap-2">
+          🎯 Quiz
+        </span>
       </div>
 
       {/* Footer */}
