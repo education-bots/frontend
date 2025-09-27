@@ -5,7 +5,8 @@ import MainPage from '@/components/MainPage'
 import LearningCards from '@/components/LearningCards'
 import ComingSoonBanner from '@/components/CommingSoonBanner'
 import FAQSection from '@/components/FAQSection'
- 
+
+
 const Home = () => {
   return (
     <div>
