@@ -51,25 +51,26 @@ function FAQSection() {
   };
 
   return (
-    <section className="relative w-full max-w-5xl mx-auto mt-20 px-4">
-      {/* Decorative background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-yellow-50 via-pink-50 to-blue-50 opacity-80 blur-2xl rounded-3xl"></div>
+<section className="relative w-full px-4 py-20 bg-gradient-to-r from-yellow-100 to-pink-100 overflow-hidden">
+  {/* Decorative background */}
+  <div className="absolute inset-0 -z-10 bg-gradient-to-br from-yellow-50 via-pink-50 to-blue-50 opacity-80 blur-2xl"></div>
 
-      {/* Heading */}
-      <div className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 bg-clip-text text-transparent drop-shadow-lg flex items-center justify-center gap-2">
-          <Sparkles className="text-yellow-400 w-8 h-8 animate-bounce" />
-          KiddoLearn FAQ
-          <Sparkles className="text-pink-400 w-8 h-8 animate-bounce" />
-        </h2>
-        <p className="mt-4 text-gray-700 text-lg md:text-xl flex justify-center gap-2 items-center">
-          <Baby className="text-pink-400 w-6 h-6" /> 
-          🌈 Curious kids ask, and our AI friend answers! 
-          <BookOpen className="text-blue-500 w-6 h-6" />
-        </p>
-      </div>
+  {/* Heading */}
+  <div className="text-center mb-12">
+    <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-600 bg-clip-text text-transparent drop-shadow-lg flex items-center justify-center gap-2">
+      <Sparkles className="text-yellow-400 w-8 h-8 animate-bounce" />
+      KiddoLearn FAQ
+      <Sparkles className="text-pink-400 w-8 h-8 animate-bounce" />
+    </h2>
+    <p className="mt-4 text-gray-700 text-lg md:text-xl flex justify-center gap-2 items-center">
+      <Baby className="text-pink-400 w-6 h-6" /> 
+      🌈 Curious kids ask, and our AI friend answers! 
+      <BookOpen className="text-blue-500 w-6 h-6" />
+    </p>
+  </div>
 
-      {/* Add Question */}
+      <div className="max-w-3xl mx-auto">
+        {/* Add Question */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -133,6 +134,7 @@ function FAQSection() {
             </AnimatePresence>
           </motion.div>
         ))}
+      </div>
       </div>
     </section>
   );

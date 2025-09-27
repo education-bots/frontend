@@ -16,11 +16,11 @@ function MainPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-pink-50 via-yellow-50 to-blue-50 flex flex-col items-center p-6 font-sans">
+    <main className="min-h-screen bg-gradient-to-r from-yellow-200 via-pink-200 to-blue-200  flex flex-col items-center px-4 sm:px-6 py-[80px] font-sans">
       {/* Header */}
       <header className="w-full max-w-6xl text-center mt-8">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-blue-600 drop-shadow-md">
-          🌟 KiddoLearn — Agentic AI for Little Learners 🌟
+        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-blue-600 drop-shadow-md">
+          🌟 KiddoLearn — Agentic AI for Little Learners!
         </h1>
         <p className="mt-4 text-gray-700 max-w-2xl mx-auto text-sm md:text-lg">
           Fun, safe and interactive lessons for Kindergarten to Grade 1. Bright visuals, friendly characters and bite-sized learning.

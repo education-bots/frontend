@@ -21,8 +21,8 @@ import { motion } from "framer-motion";
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-r from-yellow-100 to-pink-100">
-      <div className="max-w-6xl mx-auto px-6 text-center">
+   <section className="bg-gradient-to-r from-yellow-100 to-pink-100 px-4 sm:px-6 py-[80px]">
+    <div className="max-w-6xl mx-auto px-6 text-center">
         {/* Heading */}
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
