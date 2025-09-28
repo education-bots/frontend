@@ -69,7 +69,7 @@ export default function ChatPage() {
         ]);
         setCurrentChat(chatHistory.length);
       }
-    } catch (err) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         { role: "assistant", text: "⚠️ Error contacting the agent." },

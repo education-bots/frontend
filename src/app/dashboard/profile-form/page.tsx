@@ -5,15 +5,15 @@ import { useState } from "react";
 
 interface Profile {
   full_name?: string;
-  class?: string;
-  age?: number | string;
+  class_level?: string;
+  date_of_birth?: string;
 }
 
 export default function ProfileForm({ profile }: { profile: Profile }) {
   const supabase = createClient();
   const [fullName, setFullName] = useState(profile?.full_name || "");
-  const [userClass, setUserClass] = useState(profile?.class || "");
-  const [age, setAge] = useState(profile?.age || "");
+  const [userClass, setUserClass] = useState(profile?.class_level || "");
+  const [dateOfBirth, setDateOfBirth] = useState(profile?.date_of_birth || "");
 
   async function saveProfile(e: React.FormEvent) {
     e.preventDefault();
@@ -22,9 +22,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
     const { error } = await supabase.from("profiles").upsert({
       id: user.id,
       full_name: fullName,
-      class: userClass,
-      age: age ? Number(age) : null,
-      updated_at: new Date().toISOString(),
+      class_level: userClass,
+      date_of_birth: dateOfBirth || null,
     });
     if (error) return alert(error.message);
     alert("Profile updated!");
@@ -46,8 +45,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
   return (
     <form onSubmit={saveProfile} className="flex flex-col gap-2">
       <input value={fullName} onChange={e=>setFullName(e.target.value)} placeholder="Full name" className="border p-2" />
-      <input value={userClass} onChange={e=>setUserClass(e.target.value)} placeholder="Class" className="border p-2" />
-      <input type="number" value={age} onChange={e=>setAge(e.target.value)} placeholder="Age" className="border p-2" />
+      <input value={userClass} onChange={e=>setUserClass(e.target.value)} placeholder="Class Level (e.g. class-5)" className="border p-2" />
+      <input type="date" value={dateOfBirth} onChange={e=>setDateOfBirth(e.target.value)} placeholder="Date of Birth" className="border p-2" />
       <button type="submit" className="bg-green-600 text-white py-2 rounded">Save Profile</button>
 
       <div className="flex gap-2 mt-4">

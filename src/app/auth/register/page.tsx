@@ -46,8 +46,9 @@ export default function RegisterPage() {
       }
 
       form.reset();
-    } catch (err: any) {
-      toast.error(`Registration failed: ${err.message}`);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed';
+      toast.error(`Registration failed: ${errorMessage}`);
     }
 
     setLoading(false);
@@ -62,8 +63,9 @@ export default function RegisterPage() {
         },
       });
       if (error) throw error;
-    } catch (err: any) {
-      toast.error(`Google login failed: ${err.message}`);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Google login failed';
+      toast.error(`Google login failed: ${errorMessage}`);
     }
   };
 
