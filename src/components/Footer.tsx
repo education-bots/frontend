@@ -56,10 +56,10 @@ function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="relative bg-white/80 text-center py-4 text-sm text-gray-700 rounded-b-[2.5rem]">
+      <div className="relative bg-white/80 text-center py-2 text-sm text-gray-700">
         © {new Date().getFullYear()}{" "}
-        <span className="font-bold text-pink-700">KiddoLearn</span>{" "}
-        <span className="font-bold text-emerald-700">Asia Parveen</span>. All Rights Reserved.
+        <span className="font-bold text-pink-700">KiddoLearn</span>{" - "}
+        <span className="font-bold text-emerald-700">Powered by GIAIC Team</span>
       </div>
     </footer>
   );

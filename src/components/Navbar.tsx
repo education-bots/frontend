@@ -42,7 +42,7 @@ export default function Navbar() {
               className="rounded-md"
             />
             <h1 className="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-pink-700 via-purple-700 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
-              AiCompanion
+              AICompanion
             </h1>
           </div>
 
@@ -51,7 +51,7 @@ export default function Navbar() {
             <Link href="/" className="font-semibold text-purple-800 hover:text-pink-600">
               Home
             </Link>
-            
+
             {user ? (
               <>
                 <Link href="/dashboard" className="font-semibold text-purple-800 hover:text-pink-600">
@@ -90,78 +90,86 @@ export default function Navbar() {
 
       {/* Mobile dropdown */}
       {mobileOpen && (
-  <div className="lg:hidden bg-gradient-to-r from-yellow-200 via-pink-200 to-blue-200 shadow-md px-6 py-4 space-y-4">
-     {/* ✅ Added p tag under headings */}
-    <p className="mt-2 text-sm sm:text-base text-gray-700">
-      Click{" "}
-      <Link
-        href="/auth/register"
-        className="underline font-semibold text-blue-800 hover:text-pink-700"
-      >
-        Register
-      </Link>{" "}
-      to fill your admission form
-    </p>
+        <div className="lg:hidden bg-gradient-to-r from-yellow-200 via-pink-200 to-blue-200 shadow-md px-6 py-4 space-y-4">
+          {/* ✅ Added p tag under headings */}
+          <p className="mt-2 text-sm sm:text-base text-gray-700">
+            Click{" "}
+            <Link
+              href="/auth/register"
+              className="underline font-semibold text-blue-800 hover:text-pink-700"
+            >
+              Register
+            </Link>{" "}
+            to fill your admission form
+          </p>
 
-    <Link
-      href="/"
-      className="block font-semibold text-purple-800 hover:text-pink-600"
-    >
-      Home
-    </Link>
-    
-    {user ? (
-      <>
-        <Link
-          href="/dashboard"
-          className="block font-semibold text-purple-800 hover:text-pink-600"
-        >
-          Dashboard
-        </Link>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={logout}
-          className="w-full text-purple-800 hover:text-pink-600"
-        >
-          Logout
-        </Button>
-      </>
-    ) : (
-      <>
-        <Link
-          href="/auth/login"
-          className="block font-semibold text-purple-800 hover:text-pink-600"
-        >
-          Login
-        </Link>
-        <Link
-          href="/auth/register"
-          className="block font-semibold text-purple-800 hover:text-pink-600"
-        >
-          Register
-        </Link>
-      </>
-    )}
-  </div>
-)}
+          <Link
+            href="/"
+            className="block font-semibold text-purple-800 hover:text-pink-600"
+          >
+            Home
+          </Link>
+
+          {user ? (
+            <>
+              <Link
+                href="/chat"
+                className="block font-semibold text-purple-800 hover:text-pink-600"
+              >
+                Chat
+              </Link>
+              <Link
+                href="/dashboard"
+                className="block font-semibold text-purple-800 hover:text-pink-600"
+              >
+                Dashboard
+              </Link>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={logout}
+                className="w-full text-purple-800 hover:text-pink-600"
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                className="block font-semibold text-purple-800 hover:text-pink-600"
+              >
+                Login
+              </Link>
+              <Link
+                href="/auth/register"
+                className="block font-semibold text-purple-800 hover:text-pink-600"
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
+      )}
 
 
       {/* 🎯 Centered Heading over Hero */}
       <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-50 px-4">
         <h1 className="text-xl sm:text-2xl md:text-2xl font-extrabold bg-gradient-to-r from-pink-700 via-purple-700 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
-          Welcome to AiCompanion
+          Welcome to AICompanion
         </h1>
-        <p className="mt-2 text-sm sm:text-base text-gray-700">
-          Click{" "}
-          <Link
-            href="/auth/register"
-            className="underline font-semibold text-blue-800 hover:text-pink-700"
-          >
-           Register
-          </Link>{" "}
-          to fill your admission form
-        </p>
+        {user ? null : (
+          <p className="mt-2 text-sm sm:text-base text-gray-700">
+            Click{" "}
+            <Link
+              href="/auth/register"
+              className="underline font-semibold text-blue-800 hover:text-pink-700"
+            >
+              Register
+            </Link>{" "}
+            to fill your admission form
+          </p>
+        )}
       </div>
     </nav>
   );

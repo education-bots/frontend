@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { useRouter, usePathname } from "next/navigation";
-import Background3D from "./background3D";
+// import Background3D from "./background3D";
 import Sidebar from "./sidebar";
 import Topbar from "./topbar";
 
@@ -71,8 +71,8 @@ export default function DashboardLayout({
   const role = profile?.role || "student";
 
   return (
-    <div className="relative min-h-screen bg-gray-50">
-      <Background3D />
+    <div className="relative min-h-screen bg-gray-50 mt-10">
+      {/* <Background3D /> */}
 
       <div className="relative z-10 flex h-screen">
         {/* Sidebar - Desktop */}
