@@ -2,40 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { Database } from "@/types/database.types";
+import { getUserData } from "@/lib/supabase/user";
+import Image from "next/image";
 
-// ✅ Define Book type
-type Book = {
-  Row: {
-    id: string;
-    title: string;
-    subject: string;
-    class_level: string;
-    pdf_url: string | null;
-    created_at: string | null;
-    is_public: boolean | null;
-    storage_object_id: string | null;
-    supabase_path: string | null;
-    thumbnail_url: string | null;
-    uploaded_by: string | null;
-  };
-  Insert: {
-    id?: string;
-    title: string;
-    subject: string;
-    class_level: string;
-    pdf_url?: string | null;
-    created_at?: string | null;
-    is_public?: boolean | null;
-    storage_object_id?: string | null;
-    supabase_path?: string | null;
-    thumbnail_url?: string | null;
-    uploaded_by?: string | null;
-  };
-  Update: Partial<Book["Insert"]>;
-};
+type Book = Database["public"]["Tables"]["books"]["Row"];
+type InsertBook = Database["public"]["Tables"]["books"]["Insert"];
 
 export default function BooksPage() {
-  const [books, setBooks] = useState<Book["Row"][]>([]);
+
+  const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
 
@@ -57,7 +33,7 @@ export default function BooksPage() {
       if (error) {
         console.error("Error fetching books:", error.message);
       } else {
-        setBooks((data as Book["Row"][]) || []);
+        setBooks((data as Book[]) || []);
       }
       setLoading(false);
     };
@@ -78,7 +54,8 @@ export default function BooksPage() {
 
     try {
       // Storage path: /class-{n}/{subject}.pdf
-      const filePath = `class-${classLevel}/${subject}.pdf`;
+      const filePath = `/class-${classLevel}/${subject}.pdf`;
+      const user = await getUserData(supabase)
 
       // Upload to storage bucket "books_pdf"
       const { error: uploadError } = await supabase.storage
@@ -88,25 +65,23 @@ export default function BooksPage() {
       if (uploadError) throw uploadError;
 
       // Get public URL
-      const { data: publicData } = supabase.storage
-        .from("books_pdf")
-        .getPublicUrl(filePath);
+      // const { data: publicData } = supabase.storage
+      //   .from("books_pdf")
+      //   .getPublicUrl(filePath);
 
-      const pdfUrl = publicData.publicUrl;
+      // const pdfUrl = publicData.publicUrl;
 
       // Insert into "books" table
-      const { error: insertError } = await supabase.from("books").insert([
-        {
-          title,
-          subject,
-          class_level: classLevel,
-          pdf_url: pdfUrl,
-          supabase_path: filePath,
-          is_public: true,
-        } as Book["Insert"],
-      ]);
+      // const { error: insertError } = await supabase.from("books").insert({
+      //   title,
+      //   subject,
+      //   class_level: `class-${classLevel}`,
+      //   pdf_url: pdfUrl,
+      //   supabase_path: filePath,
+      //   is_public: true,
+      // } as InsertBook);
 
-      if (insertError) throw insertError;
+      // if (insertError) throw insertError;
 
       alert("Book uploaded successfully!");
 
@@ -121,7 +96,7 @@ export default function BooksPage() {
         .from("books")
         .select("*")
         .order("created_at", { ascending: false });
-      setBooks((newBooks as Book["Row"][]) || []);
+      setBooks((newBooks as Book[]) || []);
     } catch (err: any) {
       console.error("Upload failed:", err.message);
       alert("Error uploading book.");
@@ -139,11 +114,11 @@ export default function BooksPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white mt-20">
+    <div className="max-w-6xl mx-auto px-4">
+      <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
         Books
       </h1>
-
+      
       {/* ✅ Upload Form */}
       <form
         onSubmit={handleUpload}
@@ -198,6 +173,7 @@ export default function BooksPage() {
               key={book.id}
               className="border rounded-lg shadow-sm p-4 bg-white dark:bg-gray-800"
             >
+              {/* <Image src={book.thumbnail_url} alt="" height={50} width={100} /> */}
               <h2 className="text-xl font-semibold mb-2">{book.title}</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-1">
                 Subject: {book.subject}

@@ -37,7 +37,7 @@ export default function Sidebar({
   > = {
     student: [
       { label: "Profile", icon: UserCircle, path: "/dashboard/profile" },
-      { label: "Courses", icon: BookOpen, path: "/dashboard/courses" },
+      { label: "Books", icon: BookOpen, path: "/dashboard/books" },
       { label: "Analytics", icon: BarChart2, path: "/dashboard/analytics" },
       { label: "Security", icon: KeyRound, path: "/dashboard/security" },
     ],
