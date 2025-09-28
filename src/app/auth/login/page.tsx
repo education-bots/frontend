@@ -7,10 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
+import Image from "next/image";
+import { EyeClosedIcon, EyeIcon } from "lucide-react";
 
 export default function LoginPage() {
+
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -81,12 +84,23 @@ export default function LoginPage() {
         <CardContent className="space-y-6">
           <form onSubmit={handleLogin} className="space-y-4">
             <Input name="email" type="email" placeholder="Email" required />
-            <Input
-              name="password"
-              type="password"
-              placeholder="Password"
-              required
-            />
+            <div className="relative">
+              <Input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Create a password"
+                className="h-11 pr-10"
+                required
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                className="absolute inset-y-0 top-1 right-0 px-3 text-gray-600 hover:text-gray-900"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeIcon /> : <EyeClosedIcon />}
+              </Button>
+            </div>
             <Button
               type="submit"
               className="w-full h-11 bg-indigo-600 text-white rounded-xl"
@@ -108,7 +122,8 @@ export default function LoginPage() {
             className="w-full flex items-center justify-center gap-2"
             onClick={loginWithGoogle}
           >
-            <FcGoogle size={20} /> Continue with Google
+            <Image src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="Google Icon" width={22} height={22} />
+            Continue with Google
           </Button>
 
           <div className="mt-2 text-center text-sm text-gray-600">

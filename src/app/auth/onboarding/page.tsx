@@ -7,7 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
-import { GraduationCap, UserCog, School, ShieldCheck } from "lucide-react";
+import { GraduationCap, School } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -18,6 +18,7 @@ import {
 import type { Database } from "@/types/database.types";
 
 export default function OnboardingPage() {
+
   const [role, setRole] = useState("student");
   const [studentRollNo, setStudentRollNo] = useState("");
   const [language, setLanguage] = useState("Urdu");
@@ -28,9 +29,7 @@ export default function OnboardingPage() {
 
   const roles = [
     { value: "student", label: "Student", icon: GraduationCap },
-    { value: "parent", label: "Parent", icon: UserCog },
     { value: "teacher", label: "Teacher", icon: School },
-    { value: "admin", label: "Admin", icon: ShieldCheck },
   ];
 
   const languages = ["Urdu", "English", "Arabic", "French", "Chinese"];
@@ -160,7 +159,7 @@ export default function OnboardingPage() {
                     Preferred Language
                   </label>
                   <Select value={language} onValueChange={setLanguage}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select a language" />
                     </SelectTrigger>
                     <SelectContent>

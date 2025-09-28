@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -7,11 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { EyeClosedIcon, EyeIcon } from "lucide-react";
 
 export default function RegisterPage() {
+
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -66,7 +68,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 px-4">
+    <div className="flex min-h-[100dvh] items-center justify-center px-4">
       <Card className="w-full max-w-md shadow-xl border rounded-2xl">
         <CardHeader className="text-center space-y-2">
           <CardTitle className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-pink-600 bg-clip-text text-transparent">
@@ -82,7 +84,8 @@ export default function RegisterPage() {
             className="w-full flex items-center justify-center gap-2 font-medium"
             onClick={signUpWithGoogle}
           >
-            <FcGoogle size={22} /> Sign up with Google
+            <Image src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="Google Icon" width={22} height={22} />
+            Sign up with Google
           </Button>
 
           <div className="relative flex items-center">
@@ -93,7 +96,23 @@ export default function RegisterPage() {
 
           <form onSubmit={handleRegister} className="space-y-4">
             <Input name="email" type="email" placeholder="Enter your email" className="h-11" required />
-            <Input name="password" type="password" placeholder="Create a password" className="h-11" required />
+            <div className="relative">
+              <Input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Create a password"
+                className="h-11 pr-10"
+                required
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                className="absolute inset-y-0 top-1 right-0 px-3 text-gray-600 hover:text-gray-900"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeIcon /> : <EyeClosedIcon />}
+              </Button>
+            </div>
             <Button
               type="submit"
               className="w-full h-11 bg-gradient-to-r from-indigo-600 to-pink-600 text-white font-medium shadow hover:opacity-90 rounded-xl"
@@ -113,6 +132,6 @@ export default function RegisterPage() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </div >
   );
 }
