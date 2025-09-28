@@ -3,6 +3,7 @@ import { supabase } from "@/lib/supabase/client";
 import { getUserData } from "@/lib/supabase/user";
 import { useState } from "react";
 import { uuidv4 } from "zod";
+import { calculateAge } from "@/lib/utils"
 
 type Msg = { role: "user" | "assistant"; text: string };
 
@@ -26,24 +27,28 @@ export default function ChatPage() {
 
     try {
       const user = await getUserData(supabase);
+      const age = user.user?.date_of_birth ? calculateAge(user.user.date_of_birth) : 12;
+      
+      console.log("sending request")
       const resp = await fetch("https://my-backend-261417763703.us-central1.run.app/api/v1/agents/ask", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "edu-api-client": process.env.NEXT_PUBLIC_FRONTEND_AUTH_SECRET! },
         body: JSON.stringify({
-          user_id: user.id,
-          conversation_id: uuidv4(),
+          user_id: user.auth.id,
+          conversation_id: String(uuidv4()),
           question: input,
           user: {
-            user_id: user.id,
-            name: "str",
-            class_level: "",
-            language: "",
-            age: 5,
+            user_id: user.auth.id,
+            name: user.user?.full_name || "user",
+            class_level: user.user?.class_level || '5',
+            language: user.user?.language_preference || "english",
+            age: age,
           }
         }),
       });
 
       const data = await resp.json();
+      console.log(data);
       const assistantMsg: Msg = {
         role: "assistant",
         text: data.reply ?? "No response",
