@@ -4,10 +4,8 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Database } from "@/types/database.types";
 import { getUserData } from "@/lib/supabase/user";
-import Image from "next/image";
 
 type Book = Database["public"]["Tables"]["books"]["Row"];
-type InsertBook = Database["public"]["Tables"]["books"]["Insert"];
 
 export default function BooksPage() {
 
@@ -55,7 +53,7 @@ export default function BooksPage() {
     try {
       // Storage path: /class-{n}/{subject}.pdf
       const filePath = `/class-${classLevel}/${subject}.pdf`;
-      const user = await getUserData(supabase)
+      await getUserData(supabase)
 
       // Upload to storage bucket "books_pdf"
       const { error: uploadError } = await supabase.storage
@@ -97,8 +95,9 @@ export default function BooksPage() {
         .select("*")
         .order("created_at", { ascending: false });
       setBooks((newBooks as Book[]) || []);
-    } catch (err: any) {
-      console.error("Upload failed:", err.message);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Upload failed';
+      console.error("Upload failed:", errorMessage);
       alert("Error uploading book.");
     } finally {
       setUploading(false);
