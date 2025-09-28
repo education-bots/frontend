@@ -17,13 +17,13 @@ const eslintConfig = [
   // Custom rules and ignores
   {
     ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
-      "next-env.d.ts",
-      "src/types/**/*.ts", // ignore type declaration files
-    ],
+  "node_modules/**",
+  ".next/**",
+  "out/**",
+  "build/**",
+  "next-env.d.ts",
+  "src/types/**/*.ts", // <- ignore all type files
+],
     rules: {
       "react/no-unescaped-entities": "off",
       "@typescript-eslint/quotes": "off",
