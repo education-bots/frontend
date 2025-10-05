@@ -3,15 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import useSupabaseBrowser from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-
 import type { User } from "@supabase/supabase-js";
 
 export default function Navbar() {
+
   const [user, setUser] = useState<User | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const supabase = useSupabaseBrowser();
 
   useEffect(() => {
     const getUser = async () => {

@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
-import { supabase } from "@/lib/supabase/client";
+import useSupabaseBrowser from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function CallbackPage() {
   const router = useRouter();
+  const supabase = useSupabaseBrowser();
 
   useEffect(() => {
     const checkProfile = async () => {

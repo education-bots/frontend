@@ -1,6 +1,13 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { profileFormSchema, ProfileFormSchema } from "@/features/profile/schema";
+import { useProfile } from "@/features/profile/hooks";
 import { useState } from "react";
 
 interface Profile {
@@ -10,49 +17,125 @@ interface Profile {
 }
 
 export default function ProfileForm({ profile }: { profile: Profile }) {
-  const supabase = createClient();
-  const [fullName, setFullName] = useState(profile?.full_name || "");
-  const [userClass, setUserClass] = useState(profile?.class_level || "");
-  const [dateOfBirth, setDateOfBirth] = useState(profile?.date_of_birth || "");
+  const { updateProfile, changePassword, signOut, isUpdating, isChangingPassword, isSigningOut } = useProfile();
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
 
-  async function saveProfile(e: React.FormEvent) {
-    e.preventDefault();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-    const { error } = await supabase.from("profiles").upsert({
-      id: user.id,
-      full_name: fullName,
-      class_level: userClass,
-      date_of_birth: dateOfBirth || null,
-    });
-    if (error) return alert(error.message);
-    alert("Profile updated!");
-  }
+  const form = useForm<ProfileFormSchema>({
+    resolver: zodResolver(profileFormSchema),
+    defaultValues: {
+      full_name: profile?.full_name || "",
+      class_level: profile?.class_level || "",
+      date_of_birth: profile?.date_of_birth || "",
+    },
+  });
 
-  async function changePassword() {
+  const onSubmit = async (data: ProfileFormSchema) => {
+    try {
+      await updateProfile(data);
+    } catch (error) {
+      console.error("Failed to update profile:", error);
+    }
+  };
+
+  const handleChangePassword = async () => {
     const newPass = prompt("Enter new password:");
     if (!newPass) return;
-    const { error } = await supabase.auth.updateUser({ password: newPass });
-    if (error) return alert(error.message);
-    alert("Password changed!");
-  }
+    try {
+      await changePassword({
+        currentPassword: "", // This would need to be collected from a form
+        newPassword: newPass,
+        confirmPassword: newPass,
+      });
+    } catch (error) {
+      console.error("Failed to change password:", error);
+    }
+  };
 
-  async function signOut() {
-    await supabase.auth.signOut();
-    window.location.href = "/auth/login";
-  }
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error("Failed to sign out:", error);
+    }
+  };
 
   return (
-    <form onSubmit={saveProfile} className="flex flex-col gap-2">
-      <input value={fullName} onChange={e=>setFullName(e.target.value)} placeholder="Full name" className="border p-2" />
-      <input value={userClass} onChange={e=>setUserClass(e.target.value)} placeholder="Class Level (e.g. class-5)" className="border p-2" />
-      <input type="date" value={dateOfBirth} onChange={e=>setDateOfBirth(e.target.value)} placeholder="Date of Birth" className="border p-2" />
-      <button type="submit" className="bg-green-600 text-white py-2 rounded">Save Profile</button>
+    <Card className="max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle>Profile Settings</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="full_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Full Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your full name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-      <div className="flex gap-2 mt-4">
-        <button type="button" onClick={changePassword} className="bg-yellow-500 text-white py-2 px-4 rounded">Change Password</button>
-        <button type="button" onClick={signOut} className="bg-red-500 text-white py-2 px-4 rounded">Sign Out</button>
-      </div>
-    </form>
+            <FormField
+              control={form.control}
+              name="class_level"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Class Level</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g. class-5" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="date_of_birth"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date of Birth</FormLabel>
+                  <FormControl>
+                    <Input type="date" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit" disabled={isUpdating} className="w-full">
+              {isUpdating ? "Saving..." : "Save Profile"}
+            </Button>
+          </form>
+        </Form>
+
+        <div className="flex gap-2 mt-4">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleChangePassword}
+            disabled={isChangingPassword}
+            className="flex-1"
+          >
+            {isChangingPassword ? "Changing..." : "Change Password"}
+          </Button>
+          <Button
+            type="button"
+            variant="destructive"
+            onClick={handleSignOut}
+            disabled={isSigningOut}
+            className="flex-1"
+          >
+            {isSigningOut ? "Signing Out..." : "Sign Out"}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

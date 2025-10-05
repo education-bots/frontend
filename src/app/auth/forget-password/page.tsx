@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import useSupabaseBrowser from "@/lib/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
 export default function ForgotPasswordPage() {
+
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const supabase = useSupabaseBrowser();
+
 
   const handleForgot = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import useSupabaseBrowser from "@/lib/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,8 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const supabase = useSupabaseBrowser();
+
 
   const handleReset = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
