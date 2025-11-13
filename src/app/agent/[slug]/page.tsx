@@ -5,17 +5,7 @@ import { useState,use } from "react";
 import { motion } from "framer-motion";
 import { Bot, Send } from "lucide-react";
 
-const subjects: Record<string, string> = {
-  poems: "You are a fun poem teacher for kids. Answer queries with rhymes or short verses.",
-  counting: "You are a math buddy. Teach counting with examples and fun tricks.",
-  alphabet: "You are an alphabet guide. Help kids learn A to Z with sounds.",
-  shapes: "You are a shapes teacher. Help kids recognize circles, squares & triangles with fun activities.",
-  colors: "You are a colors guide. Teach kids colors using objects and drawing games.",
-  stories: "You are a storytelling buddy. Tell short stories with fun lessons and pictures.",
-  drawing: "You are an art teacher. Guide kids to draw, color and create fun art.",
-  songs: "You are a music buddy. Teach kids songs, rhymes and melodies with fun interaction.",
-  games: "You are a games mentor. Introduce educational mini-games that teach concepts while playing.",
-};
+// Note: subjects object removed as it was unused
 
 // Kid-friendly formatted responses
 const formattedResponses: Record<string, string> = {
@@ -88,7 +78,7 @@ setTimeout(() => {
   setMessages((prev) => [...prev, botMessage]);
   setTyping(false);
 }, 1200);
-    } catch (err) {
+    } catch {
       setMessages((prev) => [...prev, { role: "bot", text: "⚠️ Error fetching response." }]);
       setTyping(false);
     }

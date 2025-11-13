@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import useSupabaseBrowser from "@/lib/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,7 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const supabase = useSupabaseBrowser();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,8 +47,9 @@ export default function RegisterPage() {
       }
 
       form.reset();
-    } catch (err: any) {
-      toast.error(`Registration failed: ${err.message}`);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed';
+      toast.error(`Registration failed: ${errorMessage}`);
     }
 
     setLoading(false);
@@ -62,8 +64,9 @@ export default function RegisterPage() {
         },
       });
       if (error) throw error;
-    } catch (err: any) {
-      toast.error(`Google login failed: ${err.message}`);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Google login failed';
+      toast.error(`Google login failed: ${errorMessage}`);
     }
   };
 

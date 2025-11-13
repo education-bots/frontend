@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "../components/Navbar";
- 
- 
- 
-import Footer from "../components/Footer";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import { Toaster } from "react-hot-toast";
+import { ReactQueryClientProvider } from "@/components/providers";
 
 
 export const metadata: Metadata = {
@@ -21,12 +19,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+        suppressHydrationWarning
+        data-qb-installed="true"
         className="antialiased flex flex-col min-h-screen bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100"
       >
-        <Navbar />
-        {/* Main content grows to push footer down */}
-        <main className="flex-grow mt-10">{children}</main>
-        <Footer />
+        <ReactQueryClientProvider>
+
+          <Navbar />
+          {/* Main content grows to push footer down */}
+          <main className="flex-grow mt-10">{children}</main>
+          <Footer />
+        </ReactQueryClientProvider>
 
         <Toaster
           position="top-center"

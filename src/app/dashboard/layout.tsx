@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import useSupabaseBrowser from "@/lib/supabase/client";
 import { useRouter, usePathname } from "next/navigation";
 // import Background3D from "./background3D";
 import Sidebar from "./sidebar";
@@ -24,6 +24,8 @@ export default function DashboardLayout({
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false); // desktop collapse
   const router = useRouter();
   const pathname = usePathname();
+  const supabase = useSupabaseBrowser();
+
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -87,9 +89,8 @@ export default function DashboardLayout({
 
         {/* Sidebar - Mobile (Drawer) */}
         <div
-          className={`fixed inset-0 z-50 md:hidden transition-transform duration-300 ${
-            sidebarOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className={`fixed inset-0 z-50 md:hidden transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
         >
           {/* Overlay */}
           <div
